@@ -1,0 +1,175 @@
+Table kantors { 
+  id int [pk, increment]
+  nama_kantor varchar // Nama kantor pusat atau nama cabang
+  tipe_kantor enum('pusat', 'cabang') // PENAMBAHAN: Untuk membedakan jenis kantor
+  alamat text
+  url_peta text [null] // URL Google Maps atau koordinat (bisa pakai string "latitude,longitude")
+  url_gambar_kantor varchar [null] // Path ke gambar kantor
+  jam_operasional_teks text // Contoh: "Senin - Jumat: 08.00 - 16.00 WIB, Sabtu: 08.00 - 14.00 WIB"
+  deskripsi text [null] // Deskripsi umum tentang kantor ini
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Untuk admin/staf yang login (pengguna sistem)
+Table users { 
+  id int [pk, increment]
+  name varchar
+  email varchar [unique]
+  password varchar
+  role enum('superadmin', 'admin', 'staf')
+  kantor_id int [ref: > kantors.id, null] // FK ke tabel kantors (untuk staf di kantor pusat/cabang)
+  terakhir_login timestamp
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Struktur departemen CU (bisa di pusat atau di cabang)
+Table departemens {
+  id int [pk, increment]
+  kantor_id int [ref: > kantors.id, null]
+  // FK ke tabel kantors (null untuk departemen di kantor pusat, atau ke id cabang jika departemen spesifik cabang)
+  nama_departemen varchar
+  deskripsi text [null]
+  tipe_departemen enum('pusat', 'cabang_umum') [null] // Membedakan departemen yang hanya ada di kantor pusat atau di cabang
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table sub_departemens { 
+  // Struktur sub-departemen CU
+  id int [pk, increment]
+  departemen_id int [ref: > departemens.id] 
+  // FK ke tabel departemens
+  nama_sub_departemen varchar
+  deskripsi text [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table stafs { 
+  // Detail profil staf/karyawan CU
+  id int [pk, increment]
+  user_id int [ref: > users.id, unique, null] // FK ke tabel users (jika staf memiliki akun login)
+  nama varchar
+  jabatan varchar
+  kantor_id int [ref: > kantors.id] // Wajib, setiap staf di suatu kantor
+  departemen_id int [ref: > departemens.id, null] // Optional: untuk staf di pusat atau yang terstruktur
+  sub_departemen_id int [ref: > sub_departemens.id, null] // Optional: untuk staf yang lebih spesifik
+  foto varchar [null] // URL path gambar profil staf
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Kategori untuk posts/berita
+Table kategoris {
+  id int [pk, increment]
+  nama_kategori varchar [unique]
+  slug varchar [unique]
+  deskripsi text [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Konten publik seperti berita/artikel
+Table posts {
+  id int [pk, increment]
+  judul varchar
+  slug varchar [unique]
+  konten text
+  kategori_id int [ref: > kategoris.id] // FK ke tabel kategoris
+  waktu_publikasi timestamp
+  user_id int [ref: > users.id] // FK ke tabel users (penulis post)
+  thumbnail varchar [null] // Path gambar thumbnail post
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Galeri foto dan video
+Table galeris {
+  id int [pk, increment]
+  judul varchar
+  tipe enum('foto', 'video')
+  keterangan text [null]
+  url_media text
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Fitur kalkulator simulasi pinjaman (untuk publik)
+Table simulasi_pinjamans {
+  id int [pk, increment]
+  jumlah decimal(15,2)
+  jenis_pinjaman enum(
+    'buku anggota',
+    'pasimpong',
+    'tuas',
+    'thr',
+    'tamapan',
+    'tandur',
+    'taja',
+    'tamasa'
+  )
+  tujuan varchar
+  jangka_waktu_bulan int
+  tipe_perhitungan enum('flat', 'anuitas', 'menurun')
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Tabel untuk jenis-jenis simpanan yang ditawarkan CU
+Table jenis_simpanans {
+  id int [pk, increment]
+  kode_simpanan varchar [unique]
+  nama_simpanan varchar [unique]
+  keterangan text [null]
+  gambar_buku varchar [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Tabel untuk jenis-jenis pinjaman yang ditawarkan CU
+Table jenis_pinjamans {
+  id int [pk, increment]
+  kode_pinjaman varchar [unique]
+  nama_pinjaman varchar // PENAMBAHAN: Nama pinjaman agar lebih deskriptif
+  deskripsi text [null]
+  jenis_pinjaman enum(
+  	'Pinjaman Produktif'
+		'Pinjaman Konsumtif'
+		'Pinjaman Untuk Menambah Saham Dan Tabungan'
+		'Pinjaman Kepemilikan Tanah Dan Rumah'
+		'Pinjaman Pendidikan'
+		'Pinjaman Kesehatan'
+  )
+  keterangan text [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+
+Catatan:
+Untuk simulasi pinjaman:
+Itu akan berubah seiiring berjalannya waktu
+
+Testimonial Tidak Ditampilkan di frontend melainkan cukup menjadi pengetahuan untuk users!
+
+Partnership / Mitra:
+	- id
+	- nama_mitra
+	- gambar
+	- deskripsi
+	
+ChatGPT, tolong dong saya ingin membuat ebook terkait programming C++, jadi saya minta Anda buatkan saya bab dan sub-sub bab yang relate terkait programming C++ dari awal hingga mahir.
+
+Yang belum lengkap:
+- Pas Foto
+- Akta Kelahiran
+- Foto rumah sisi kiri
+- Foto rumah sisi depan
+- Foto rumah sisi kanan
+
+
+Tadi saya menjalankan perintah berikut ini di terminal linux ubuntu saya. 
+- sudo apt-get install playonlinux
+- sudo apt-get install winbind

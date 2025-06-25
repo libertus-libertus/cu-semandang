@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Union Modern - Melayani dengan Hati</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Dropdown styles for smooth animation */
+        .dropdown-content {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out;
+            min-width: max-content; /* Ensure it takes at least content width */
+        }
+
+        .dropdown-content.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* Carousel button styling */
+        .carousel-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Carousel slide transition */
+        .carousel-slide {
+            transition: opacity 700ms ease-in-out, z-index 0ms;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .carousel-slide:not(.active) {
+            opacity: 0;
+            z-index: 0;
+        }
+
+        /* Carousel text overlay positioning and responsive adjustments */
+        .carousel-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px; /* Adjusted max-width for larger screens */
+            padding: 1.5rem 2rem; /* Increased padding for better appearance */
+            text-align: center;
+            z-index: 20;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.2); /* Subtle background for readability */
+            border-radius: 8px; /* Slightly rounded corners */
+            transition: opacity 0.5s ease-in-out; /* Smooth transition for text overlay */
+        }
+
+        /* Hide text overlay by default and show with JS */
+        .carousel-text-overlay:not(.active-text) {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .carousel-text-overlay.active-text {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+        @media (min-width: 768px) {
+            .carousel-text-overlay {
+                text-align: left; /* Align text left on larger screens */
+                left: 10%; /* Adjust position to left for a banner feel */
+                transform: translate(0, -50%); /* Only vertical centering */
+                max-width: 600px; /* Restrict width */
+                padding: 2rem 3rem; /* More padding */
+                background-color: rgba(0, 0, 0, 0.4); /* Darker overlay for desktop */
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .carousel-text-overlay {
+                padding: 1.25rem 1.5rem;
+                /* Adjusted padding for tablets */
+            }
+
+            .carousel-text-overlay h1 {
+                font-size: 2.25rem;
+                /* Slightly smaller on tablets */
+                line-height: 1.2;
+                margin-bottom: 0.5rem;
+            }
+
+            .carousel-text-overlay p {
+                font-size: 1.1rem;
+                /* Slightly smaller on tablets */
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+
+            .carousel-text-overlay .flex-col {
+                flex-direction: column;
+            }
+
+            .carousel-text-overlay .flex-col>* {
+                width: 100%;
+            }
+
+            .carousel-text-overlay .flex-col>*:first-child {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .carousel-text-overlay {
+                padding: 1rem;
+            }
+
+            .carousel-text-overlay h1 {
+                font-size: 1.8rem;
+            }
+
+            .carousel-text-overlay p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50">
+    <div class="bg-blue-800 text-white py-2 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex space-x-4 mb-2 md:mb-0">
+                <a href="tel:+628123456789" class="text-sm hover:text-blue-200 transition">
+                    <i class="fas fa-phone-alt mr-1"></i> +62 812-3456-7890
+                </a>
+                <a href="mailto:semandang91@yahoo.com" class="text-sm hover:text-blue-200 transition">
+                    <i class="fas fa-envelope mr-1"></i> semandang91@yahoo.com
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex space-x-3">
+                    <a href="https://www.facebook.com/SemandangJayaOptimis" target="_blank" class="hover:text-blue-200 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/cusemandangjaya/" target="_blank" class="hover:text-blue-200 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/Semandang_Jaya" target="_blank" class="hover:text-blue-200 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.youtube.com/c/CUSemandangJaya" target="_blank" class="hover:text-blue-200 transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <div class="border-l border-blue-600 h-6 mx-2"></div>
+                <div class="flex space-x-2">
+                    <button class="text-sm font-medium hover:text-blue-200">ID</button>
+                    <button class="text-sm font-medium hover:text-blue-200">EN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html">
+                        <img src="assets/img/logo-ksp-cusj.png" alt="Credit Union Logo" class="h-10">
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8">
+                    <div class="relative dropdown">
+                        <button class="text-gray-700 hover:text-blue-600 font-medium flex items-center dropdown-button">
+                            Profile <i class="fas fa-chevron-down ml-1 text-xs transition-transform transform"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 bg-white shadow-lg rounded-md py-2 z-50 dropdown-content">
+                            <a href="history.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Sejarah</a>
+                            <a href="vission_mission.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Visi & Misi Lembaga</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Legalitas & Prestasi</a>
+                            <a href="shared_values.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Shared Values</a>
+                            <a href="organization_structure.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Struktur Organisasi</a>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown">
+                        <button class="text-gray-700 hover:text-blue-600 font-medium flex items-center dropdown-button">
+                            Produk Kami <i class="fas fa-chevron-down ml-1 text-xs transition-transform transform"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 bg-white shadow-lg rounded-md py-2 z-50 dropdown-content">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Syarat & Ketentuan</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Pinjaman</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Simpanan</a>
+                        </div>
+                    </div>
+
+                    <a href="branch_offices.html" class="text-gray-700 hover:text-blue-600 font-medium">Kantor Cabang</a>
+                    <a href="new_list.html" class="text-gray-700 hover:text-blue-600 font-medium">Agenda</a>
+                    <a href="partnership.html" class="text-gray-700 hover:text-blue-600 font-medium">Partnership</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium">Kontak Kami</a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button
+                        class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-menu hidden lg:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2">
+                <div class="flex flex-col space-y-2">
+                    <div class="accordion">
+                        <button
+                            class="accordion-button w-full flex justify-between items-center py-3 text-gray-700 font-medium">
+                            Tentang Kami <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div class="accordion-content hidden pl-4">
+                            <a href="history.html" class="block py-2 text-gray-600 hover:text-blue-600">Sejarah</a>
+                            <a href="vission_mission.html" class="block py-2 text-gray-600 hover:text-blue-600">Visi & Misi Lembaga</a>
+                            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600">Legalitas & Prestasi</a>
+                            <a href="shared_values.html" class="block py-2 text-gray-600 hover:text-blue-600">Shared Values</a>
+                            <a href="organization_structure.html" class="block py-2 text-gray-600 hover:text-blue-600">Struktur Organisai</a>
+                        </div>
+                    </div>
+
+                    <div class="accordion">
+                        <button
+                            class="accordion-button w-full flex justify-between items-center py-3 text-gray-700 font-medium">
+                            Produk Layanan <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div class="accordion-content hidden pl-4">
+                            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600">Syarat Keanggotaan</a>
+                            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600">Syarat Pinjaman</a>
+                            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600">Simpanan</a>
+                        </div>
+                    </div>
+
+                    <a href="branch_offices.html" class="block py-3 text-gray-700 font-medium">Kantor Cabang</a>
+                    <a href="new_list.html" class="block py-3 text-gray-700 font-medium">Agenda</a>
+                    <a href="partnership.html" class="block py-3 text-gray-700 font-medium">Partnership</a>
+                    <a href="contact.html" class="block py-3 text-gray-700 font-medium">Kontak Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative overflow-hidden">
+        <div class="carousel relative h-96 md:h-[32rem]">
+            <div class="carousel-slide absolute inset-0 bg-blue-900 flex items-center justify-center transition-opacity duration-500 active">
+                <div class="absolute inset-0 bg-black opacity-40"></div>
+                <img src="assets/img/kantor_pusat-960x400.jpg" alt="Credit Union Office" class="w-full h-full object-cover">
+                <div class="carousel-text-overlay active-text text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight text-shadow-lg" data-aos="fade-up" data-aos-duration="1000">
+                        Keamanan Finansial Anda Prioritas Kami
+                    </h1>
+                    <p class="text-lg md:text-xl mb-6 text-shadow-md" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        Wujudkan impian finansial Anda bersama Credit Union yang terpercaya dan melayani dengan hati.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center sm:justify-start gap-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <a href="contact.html" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                            Gabung Sekarang
+                        </a>
+                        <a href="contact.html" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition">
+                            Pelajari Lebih Lanjut
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide absolute inset-0 bg-green-800 flex items-center justify-center">
+                <div class="absolute inset-0 bg-black opacity-40"></div>
+                <img src="assets/img/Blue-and-Yellow-Modern-Gadget-Repair-Facebook-Cover.jpg" alt="Loan Solution" class="w-full h-full object-cover">
+                <div class="carousel-text-overlay text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight text-shadow-lg" data-aos="fade-up" data-aos-duration="1000">
+                        Solusi Pinjaman Mudah & Cepat
+                    </h1>
+                    <p class="text-lg md:text-xl mb-6 text-shadow-md" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        Dapatkan dana tunai untuk kebutuhan mendesak atau modal usaha dengan proses yang transparan.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center sm:justify-start gap-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <a href="#" class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition">
+                            Ajukan Pinjaman
+                        </a>
+                        <a href="#" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-green-600 transition">
+                            Simulasi Pinjaman
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide absolute inset-0 bg-yellow-700 flex items-center justify-center">
+                <div class="absolute inset-0 bg-black opacity-40"></div>
+                <img src="assets/img/PROMO-TARIK-TUNAI-DI-INDOMARET.jpg" alt="Saving Program" class="w-full h-full object-cover">
+                <div class="carousel-text-overlay text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight text-shadow-lg" data-aos="fade-up" data-aos-duration="1000">
+                        Investasi Masa Depan yang Cerdas
+                    </h1>
+                    <p class="text-lg md:text-xl mb-6 text-shadow-md" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        Beragam produk simpanan dengan bunga kompetitif untuk mencapai tujuan finansial Anda.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center sm:justify-start gap-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <a href="#" class="bg-yellow-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-yellow-700 transition">
+                            Lihat Produk Simpanan
+                        </a>
+                        <a href="#" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-yellow-600 transition">
+                            Konsultasi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 text-blue-800 carousel-button hover:bg-opacity-100 z-20 hidden md:flex">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 text-blue-800 carousel-button hover:bg-opacity-100 z-20 hidden md:flex">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+            <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition active"></button>
+            <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition"></button>
+            <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition"></button>
+        </div>
+    </div>
+
+    <div class="bg-white py-8 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="quick-link flex flex-col items-center p-4 rounded-lg hover:bg-blue-50 transition"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-blue-100 p-4 rounded-full mb-3">
+                        <i class="fas fa-user-plus text-blue-600 text-2xl"></i>
+                    </div>
+                    <span class="font-medium text-center">Daftar Anggota</span>
+                </a>
+                <a href="#" class="quick-link flex flex-col items-center p-4 rounded-lg hover:bg-blue-50 transition"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-green-100 p-4 rounded-full mb-3">
+                        <i class="fas fa-hand-holding-usd text-green-600 text-2xl"></i>
+                    </div>
+                    <span class="font-medium text-center">Ajukan Pinjaman</span>
+                </a>
+                <a href="#" class="quick-link flex flex-col items-center p-4 rounded-lg hover:bg-blue-50 transition"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-yellow-100 p-4 rounded-full mb-3">
+                        <i class="fas fa-piggy-bank text-yellow-600 text-2xl"></i>
+                    </div>
+                    <span class="font-medium text-center">Produk Simpanan</span>
+                </a>
+                <a href="#" class="quick-link flex flex-col items-center p-4 rounded-lg hover:bg-blue-50 transition"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-purple-100 p-4 rounded-full mb-3">
+                        <i class="fas fa-calculator text-purple-600 text-2xl"></i>
+                    </div>
+                    <span class="font-medium text-center">Simulasi Pinjaman</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8" data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Tentang Credit Union Kami</h2>
+                    <p class="text-gray-600 mb-6">Credit Union kami telah melayani anggota sejak tahun 1990 dengan
+                        prinsip gotong royong dan keadilan ekonomi. Kami berkomitmen untuk memberikan solusi keuangan
+                        yang terjangkau dan berkelanjutan bagi seluruh anggota.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Keanggotaan Terbuka</h3>
+                                <p class="text-gray-600">Siapa pun bisa bergabung dengan memenuhi syarat keanggotaan
+                                    yang sederhana.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Bunga Kompetitif</h3>
+                                <p class="text-gray-600">Pinjaman dengan bunga rendah dan simpanan dengan bunga
+                                    menarik.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Layanan Profesional</h3>
+                                <p class="text-gray-600">Didukung oleh tim profesional yang siap membantu kebutuhan
+                                    keuangan Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#"
+                        class="inline-block mt-6 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">Pelajari
+                        Lebih Lanjut</a>
+                </div>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="relative rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="About CU" class="w-full h-auto">
+                        <div
+                            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 text-white">
+                            <h3 class="text-xl font-semibold">"Bersama Membangun Kesejahteraan"</h3>
+                            <p class="text-sm opacity-90">Visi kami untuk menciptakan masyarakat yang mandiri secara
+                                finansial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Produk & Layanan Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Kami menawarkan berbagai produk keuangan yang dirancang
+                    untuk memenuhi kebutuhan anggota dengan prinsip keadilan dan transparansi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 bg-blue-600 flex items-center justify-center">
+                        <i class="fas fa-hand-holding-usd text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Pinjaman Dana</h3>
+                        <p class="text-gray-600 mb-4">Pinjaman dana dengan syarat mudah dan bunga kompetitif,
+                            ideal untuk usaha kecil dan menengah.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Bunga Rendah</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Proses Cepat</span>
+                        </div>
+                        <a href="#"
+                            class="text-blue-600 font-medium inline-flex items-center hover:text-blue-800">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 bg-green-600 flex items-center justify-center">
+                        <i class="fas fa-piggy-bank text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Simpanan Berjangka</h3>
+                        <p class="text-gray-600 mb-4">Program simpanan dengan berbagai pilihan jangka waktu dan bunga
+                            menarik untuk Anda.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Bunga Menarik</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Berbagai Jangka
+                                Waktu</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Aman Terjamin</span>
+                        </div>
+                        <a href="#"
+                            class="text-green-600 font-medium inline-flex items-center hover:text-green-800">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 bg-yellow-600 flex items-center justify-center">
+                        <i class="fas fa-seedling text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Simlulasi Pinjaman</h3>
+                        <p class="text-gray-600 mb-4">Program khusus untuk petani kakao dengan pinjaman dan pembinaan
+                            untuk meningkatkan produktivitas.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Khusus Petani</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Pembinaan</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Bunga Spesial</span>
+                        </div>
+                        <a href="#"
+                            class="text-yellow-600 font-medium inline-flex items-center hover:text-yellow-800">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-blue-800 text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
+                <div class="p-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl font-bold mb-2">25+</div>
+                    <div class="text-blue-200">Tahun Pengalaman</div>
+                </div>
+                <div class="p-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl font-bold mb-2">15K+</div>
+                    <div class="text-blue-200">Anggota Aktif</div>
+                </div>
+                <div class="p-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl font-bold mb-2">10+</div>
+                    <div class="text-blue-200">Kantor Cabang</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Berita & Kegiatan Terkini</h2>
+                    <p class="text-gray-600">Ikuti perkembangan dan kegiatan terbaru dari Credit Union kami</p>
+                </div>
+                <div class="mt-4 md:mt-0" data-aos="fade-left">
+                    <a href="#"
+                        class="inline-block border border-blue-600 text-blue-600 px-6 py-2 rounded-full font-medium hover:bg-blue-600 hover:text-white transition">Lihat
+                        Semua Berita</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="News 1"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 15 Juni 2023</span>
+                            <span class="mx-2">•</span>
+                            <span><i class="far fa-user mr-1"></i> Admin</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Pelatihan Kewirausahaan untuk Anggota CU
+                        </h3>
+                        <p class="text-gray-600 mb-4">Credit Union kami menyelenggarakan pelatihan kewirausahaan bagi
+                            anggota untuk meningkatkan keterampilan bisnis...</p>
+                        <a href="#"
+                            class="text-blue-600 font-medium inline-flex items-center hover:text-blue-800">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="News 2"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 5 Juni 2023</span>
+                            <span class="mx-2">•</span>
+                            <span><i class="far fa-user mr-1"></i> Admin</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Rapat Tahunan Anggota Credit Union 2023
+                        </h3>
+                        <p class="text-gray-600 mb-4">Telah dilaksanakan Rapat Tahunan Anggota Credit Union dengan
+                            berbagai agenda penting termasuk laporan keuangan...</p>
+                        <a href="#"
+                            class="text-blue-600 font-medium inline-flex items-center hover:text-blue-800">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="News 3"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 28 Mei 2023</span>
+                            <span class="mx-2">•</span>
+                            <span><i class="far fa-user mr-1"></i> Admin</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Program Simpanan Pendidikan Anak</h3>
+                        <p class="text-gray-600 mb-4">Kami meluncurkan program simpanan khusus pendidikan anak dengan
+                            berbagai keuntungan dan fasilitas menarik bagi...</p>
+                        <a href="#"
+                            class="text-blue-600 font-medium inline-flex items-center hover:text-blue-800">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+            <h2 class="text-3xl font-bold mb-6">Bergabunglah dengan Credit Union Kami Sekarang</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Mulai perjalanan finansial yang lebih baik dengan menjadi anggota
+                Credit Union kami. Dapatkan akses ke berbagai produk keuangan yang menguntungkan.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#"
+                    class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition">Daftar
+                    Sekarang</a>
+                <a href="#"
+                    class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition">Hubungi
+                    Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Mitra Kerja Sama Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Kami bekerja sama dengan berbagai institusi untuk memberikan
+                    pelayanan terbaik bagi anggota.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://via.placeholder.com/150x80?text=Partner+1" alt="Partner 1"
+                        class="h-12 object-contain opacity-70 hover:opacity-100 transition">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://via.placeholder.com/150x80?text=Partner+2" alt="Partner 2"
+                        class="h-12 object-contain opacity-70 hover:opacity-100 transition">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://via.placeholder.com/150x80?text=Partner+3" alt="Partner 3"
+                        class="h-12 object-contain opacity-70 hover:opacity-100 transition">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://via.placeholder.com/150x80?text=Partner+4" alt="Partner 4"
+                        class="h-12 object-contain opacity-70 hover:opacity-100 transition">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition"
+                    data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://via.placeholder.com/150x80?text=Partner+5" alt="Partner 5"
+                        class="h-12 object-contain opacity-70 hover:opacity-100 transition">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8" data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Hubungi Kami</h2>
+                    <p class="text-gray-600 mb-8">Kami siap membantu Anda dengan segala pertanyaan tentang produk dan
+                        layanan Credit Union kami. Tim customer service kami akan dengan senang hati melayani Anda.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Alamat Kantor Pusat</h3>
+                                <p class="text-gray-600">Jl. Koperasi No. 123, Kota Bandung, Jawa Barat 40123</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Telepon</h3>
+                                <p class="text-gray-600">+62 22 1234 5678 (Hunting)</p>
+                                <p class="text-gray-600">+62 812 3456 7890 (WhatsApp)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Email</h3>
+                                <p class="text-gray-600">info@creditunion.com</p>
+                                <p class="text-gray-600">cs@creditunion.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Jam Operasional</h3>
+                                <p class="text-gray-600">Senin - Jumat: 08.00 - 16.00 WIB</p>
+                                <p class="text-gray-600">Sabtu: 08.00 - 14.00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-6">Kirim Pesan</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Nama Lengkap</label>
+                                    <input type="text" id="name"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                    <input type="email" id="email"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 mb-2">Subjek</label>
+                                <input type="text" id="subject"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2">Pesan</label>
+                                <textarea id="message" rows="4"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Kirim
+                                Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <img src="assets/img/logo-ksp-cusj.png" alt="Credit Union Logo"
+                        class="h-7 mb-6">
+                    <p class="text-gray-400 mb-6">Credit Union kami berkomitmen untuk memberikan solusi keuangan yang
+                        terjangkau dan berkelanjutan bagi seluruh anggota dengan prinsip gotong royong.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i
+                                class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-lg font-semibold mb-6">Tautan Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Produk & Layanan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Kantor Cabang</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Agenda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Kontak Kami</a></li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-lg font-semibold mb-6">Produk Kami</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Pinjaman Dana</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Simpanan Berjangka</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Simulasi Pinjaman</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Syarat Keanggotaan</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-lg font-semibold mb-6">Kantor Pusat</h3>
+                    <address class="text-gray-400 not-italic mb-6">
+                        Jl. Trans Kalimantan, No 25 <br> 
+                        Balai Semandang , <br>  Simpang Hulu, Ketapang, Kalimantan Barat 78854
+                        <strong>Telepon:</strong> +62 22 1234 5678<br>
+                        <strong>Email:</strong> semandang91@yahoo.com
+                    </address>
+                    <h4 class="text-lg font-semibold mb-3">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Berlangganan newsletter kami untuk mendapatkan informasi terbaru.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Email Anda"
+                            class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
+                        <button type="submit"
+                            class="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"><i
+                                class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Credit Union. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition">Kebijakan Privasi</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition">Syarat & Ketentuan</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition">Peta Situs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button
+        class="back-to-top fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all hover:bg-blue-700">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile accordion
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const accordionContent = button.nextElementSibling;
+                const icon = button.querySelector('i');
+
+                accordionContent.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Mobile sub-accordion
+        const subAccordionButtons = document.querySelectorAll('.sub-accordion-button');
+
+        subAccordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const subAccordionContent = button.nextElementSibling;
+                const icon = button.querySelector('i');
+
+                subAccordionContent.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Desktop Dropdown Functionality (Click to toggle)
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const button = dropdown.querySelector('.dropdown-button');
+            const content = dropdown.querySelector('.dropdown-content');
+            const icon = button.querySelector('i');
+
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+
+                // Close other open dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        const otherContent = otherDropdown.querySelector('.dropdown-content');
+                        const otherIcon = otherDropdown.querySelector('i');
+                        otherContent.classList.remove('active');
+                        if (otherIcon) otherIcon.classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle current dropdown
+                content.classList.toggle('active');
+                if (icon) icon.classList.toggle('rotate-180');
+
+                // Adjust dropdown content width
+                if (content.classList.contains('active')) {
+                    let maxWidth = 0;
+                    content.querySelectorAll('a').forEach(item => {
+                        // Create a temporary span to measure text width
+                        const tempSpan = document.createElement('span');
+                        tempSpan.style.visibility = 'hidden';
+                        tempSpan.style.whiteSpace = 'nowrap';
+                        tempSpan.style.fontFamily = getComputedStyle(item).fontFamily;
+                        tempSpan.style.fontSize = getComputedStyle(item).fontSize;
+                        tempSpan.textContent = item.textContent;
+                        document.body.appendChild(tempSpan);
+                        const itemWidth = tempSpan.offsetWidth + (parseFloat(getComputedStyle(item).paddingLeft) * 2); // Include padding
+                        document.body.removeChild(tempSpan);
+                        if (itemWidth > maxWidth) {
+                            maxWidth = itemWidth;
+                        }
+                    });
+                    // Apply a minimum width or the calculated max width, adding some buffer
+                    content.style.width = `${Math.max(160, maxWidth + 20)}px`; // Min width 160px, add 20px buffer
+                } else {
+                    content.style.width = ''; // Reset width when closed
+                }
+            });
+        });
+
+        // Close dropdowns when clicking anywhere else on the document
+        document.addEventListener('click', (event) => {
+            dropdowns.forEach(dropdown => {
+                const content = dropdown.querySelector('.dropdown-content');
+                const button = dropdown.querySelector('.dropdown-button');
+                const icon = button.querySelector('i');
+                if (content.classList.contains('active') && !dropdown.contains(event.target)) {
+                    content.classList.remove('active');
+                    if (icon) icon.classList.remove('rotate-180');
+                    content.style.width = ''; // Reset width when closed
+                }
+            });
+        });
+
+
+        // Carousel functionality
+        const carousel = document.querySelector('.carousel');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const textOverlays = document.querySelectorAll('.carousel-text-overlay');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            textOverlays.forEach((overlay, index) => {
+                if (index === currentIndex) {
+                    overlay.classList.add('active-text');
+                    AOS.refreshHard(); // Re-initialize AOS animations for the active slide text
+                } else {
+                    overlay.classList.remove('active-text');
+                }
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('bg-opacity-100', index === currentIndex);
+                indicator.classList.toggle('bg-opacity-50', index !== currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        // Initialize carousel on load
+        updateCarousel();
+
+        // Auto slide
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        carousel.addEventListener('mouseleave', resetInterval);
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>

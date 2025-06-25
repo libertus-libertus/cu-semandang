@@ -1,0 +1,128 @@
+/* Custom CSS for smoother dropdowns and carousel buttons */
+/* Ensure dropdowns are initially hidden and can be toggled by JS */
+body {
+    overflow-x: hidden;
+}
+
+.dropdown-content {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Default to none */
+    transform: translateY(10px);
+    /* Slight initial offset */
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.dropdown-content.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    /* Enable on active */
+    transform: translateY(0);
+}
+
+/* Adjust carousel button size and shape */
+.carousel-button {
+    width: 40px;
+    /* Specific width */
+    height: 40px;
+    /* Specific height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    /* Fully rounded */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+/* Carousel slide transition */
+.carousel-slide {
+    transition: opacity 700ms ease-in-out, z-index 0ms;
+    /* Smooth opacity, z-index immediate */
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.carousel-slide:not(.active) {
+    opacity: 0;
+    z-index: 0;
+    /* Keep inactive slides behind */
+}
+
+/* Responsive adjustments for carousel text positioning to mimic banner */
+/* Apply this to screens up to 'lg' breakpoint (1024px) for tablet support */
+@media (max-width: 1023px) {
+
+    /* Changed from 767px to 1023px for tablet support */
+    .carousel-text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* Center horizontally and vertically */
+        width: 90%;
+        /* Adjust width for better fit on various mobile/tablet sizes */
+        max-width: 500px;
+        /* Max width to prevent text from being too wide on larger tablets */
+        padding: 1rem;
+        /* Reduced padding for better text wrapping */
+        text-align: center;
+        z-index: 20;
+        /* Ensure text is above image and overlay */
+        box-sizing: border-box;
+        /* Include padding in width calculation */
+    }
+
+    .carousel-text-overlay h1 {
+        font-size: 2.5rem;
+        /* Larger font for banner effect on mobile/tablet */
+        line-height: 1.1;
+        margin-bottom: 0.75rem;
+        /* Reduced margin */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        /* Added text shadow for better contrast */
+    }
+
+    .carousel-text-overlay p {
+        font-size: 1.25rem;
+        /* Larger font for banner effect on mobile/tablet */
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        /* Reduced margin */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        /* Added text shadow for better contrast */
+    }
+
+    .carousel-text-overlay .flex-col {
+        flex-direction: column;
+        /* Ensure buttons stack vertically on mobile */
+    }
+
+    .carousel-text-overlay .flex-col>* {
+        width: 100%;
+        /* Make buttons full width */
+    }
+
+    .carousel-text-overlay .flex-col>*:first-child {
+        margin-bottom: 0.75rem;
+        /* Add space between stacked buttons */
+    }
+}
+
+/* Further refinement for very small screens if needed */
+@media (max-width: 480px) {
+    .carousel-text-overlay h1 {
+        font-size: 2rem;
+        /* Even smaller for very small phones */
+    }
+
+    .carousel-text-overlay p {
+        font-size: 1rem;
+        /* Even smaller for very small phones */
+    }
+}
